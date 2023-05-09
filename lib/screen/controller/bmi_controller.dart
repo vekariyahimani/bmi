@@ -10,6 +10,7 @@ class BmiController extends ChangeNotifier
   double cm = 0;
   double result = 0;
   double bmi = 0.0;
+  String? body;
 
 
   void changeGender()
@@ -64,7 +65,22 @@ class BmiController extends ChangeNotifier
   {
     cm = (height/100);
     result = ((weight) / (cm * cm));
-    print(result);
+    if(result<18.5)
+    {
+      body="Underweight";
+    }
+    else if(result<25)
+    {
+      body="Normal";
+    }
+    else if(result<30)
+    {
+      body="Overweight";
+    }
+    else
+    {
+      body="Obesity";
+    }
     notifyListeners();
   }
 

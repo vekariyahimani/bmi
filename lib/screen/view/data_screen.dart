@@ -52,6 +52,7 @@ class _healthScreenState extends State<healthScreen>
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Stack(
@@ -62,19 +63,11 @@ class _healthScreenState extends State<healthScreen>
                   height: 40,
                   width: 40,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.white12,
                     shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.blueGrey.shade100,
-                        blurRadius: 3,
-                        spreadRadius: 4,
-                        offset: Offset(1, 3),
-                      ),
-                    ],
                   ),
                   child: Icon(Icons.arrow_back_ios_new,
-                      size: 20, color: Colors.grey.shade600),
+                      size: 20, color: Colors.white),
                 ),
               ),
               Align(
@@ -89,211 +82,64 @@ class _healthScreenState extends State<healthScreen>
                 ),
               ),
               Align(
-                alignment: Alignment(AlignTweenperson!.value, -0.98),
+                alignment: Alignment(AlignTweenContainer1!.value, 0),
                 child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.blueGrey.shade100,
-                        blurRadius: 3,
-                        spreadRadius: 4,
-                        offset: Offset(1, 3),
-                      ),
-                    ],
-                  ),
-                  child: Icon(Icons.person, color: Colors.grey.shade600),
-                ),
-              ),
-              Align(
-                alignment: Alignment(AlignTweenContainer1!.value, -0.75),
-                child: Container(
-                  height: 100,
+                  height: 300,
                   width: 330,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.blueGrey.shade100,
-                        blurRadius: 2,
-                        spreadRadius: 3,
-                        offset: Offset(1, 3),
-                      ),
-                    ],
+                    color: Colors.white12,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Stack(
                     children: [
-                      Text(
-                        "Your BMI",
-                        style: TextStyle(
-                            color: Colors.grey.shade700, fontSize: 17),
-                      ),
-                      Text(
-                        "${(bt!.result).toString().substring(0,4)}",
-                        style: TextStyle(
-                          fontSize: 40,
-                          color: Colors.grey.shade700,
-                        ),
-                      ),
-                      Text(
-                        "Normal Health",
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.grey.shade700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment(AlignTweenContainer2!.value, 0),
-                child: Container(
-                  height: 280,
-                  width: 330,
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.blueGrey.shade100,
-                        blurRadius: 2,
-                        spreadRadius: 3,
-                        offset: Offset(1, 3),
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "18.5 to 24.9",
-                            style: TextStyle(
-                                fontSize: 17, color: Colors.grey.shade700),
-                          ),
-                          Spacer(),
-                          Text(
-                            "Normal",
-                            style: TextStyle(
-                                color: Colors.grey.shade700,
+                      Align(
+                        alignment: Alignment(0, -0.8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Your BMI",
+                              style: TextStyle(
+                                  color: Colors.blueGrey.shade600, fontSize: 15),
+                            ),
+                            Text(
+                              "${bt!.body}",
+                              style: TextStyle(
                                 fontSize: 17,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Container(
-                        height: 2,
-                        width: 280,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey.shade50,
-                          borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              "Normal Health",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.blueGrey.shade600,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Less than 18.5",
-                            style: TextStyle(
-                                fontSize: 17, color: Colors.grey.shade700),
+                      Align(
+                        alignment: Alignment(0, 0.5),
+                        child: Container(
+                          height: 200,
+                          width: 200,
+                          child: CircularProgressIndicator(
+                            color: Colors.blueGrey.shade600,
+                            backgroundColor: Colors.white12,
+                            value: bt!.result/100,
                           ),
-                          Spacer(),
-                          Text(
-                            "Underweight",
-                            style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Container(
-                        height: 2,
-                        width: 280,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey.shade50,
-                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "25 to 29.9",
-                            style: TextStyle(
-                                fontSize: 17, color: Colors.grey.shade700),
+                      Align(
+                        alignment: Alignment(0, 0.2),
+                        child: Text(
+                          "${(bt!.result).toString().substring(0,4)} %",
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
                           ),
-                          Spacer(),
-                          Text(
-                            "Overweight",
-                            style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Container(
-                        height: 2,
-                        width: 280,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey.shade50,
-                          borderRadius: BorderRadius.circular(10),
                         ),
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "25 to 29.9",
-                            style: TextStyle(
-                                fontSize: 17, color: Colors.grey.shade700),
-                          ),
-                          Spacer(),
-                          Text(
-                            "Obesity",
-                            style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Container(
-                        height: 2,
-                        width: 280,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey.shade50,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 18,
                       ),
                     ],
                   ),
@@ -306,16 +152,10 @@ class _healthScreenState extends State<healthScreen>
                     Navigator.pop(context);
                   },
                   child: Container(
-                    height: 70,
+                    height: 60,
                     width: 260,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.blueGrey.shade700,
-                          Colors.blueGrey.shade500,
-                          Colors.blueGrey.shade400,
-                        ],
-                      ),
+                      color: Colors.redAccent.shade200,
                       borderRadius: BorderRadius.circular(13),
                     ),
                     child: Center(

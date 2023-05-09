@@ -19,7 +19,8 @@ class _bmicalcScreenState extends State<BmiScreen>
   Animation? AlignTweenr;
   Animation? AlignTweencl;
   Animation? AlignTweencr;
-  Animation? AlignTweenb;
+  Animation? AlignTweenw;
+  Animation<Offset>? AlignTweenh;
 
   BmiController? bmiControllertrue;
   BmiController? bmiControllerfalse;
@@ -38,9 +39,11 @@ class _bmicalcScreenState extends State<BmiScreen>
     AlignTweencl =
         Tween<double>(begin: -2, end: -0.98).animate(animationController!);
     AlignTweencr =
-        Tween<double>(begin: 5, end: 0.98).animate(animationController!);
-    AlignTweenb =
-        Tween<double>(begin: 2, end: 0.9).animate(animationController!);
+        Tween<double>(begin: 2, end: 0.98).animate(animationController!);
+    AlignTweenw =
+        Tween<double>(begin: -5, end: -0.80).animate(animationController!);
+    AlignTweenh =
+        Tween<Offset>(begin: Offset(-1,1.5), end: Offset(0,1.5)).animate(animationController!);
     animationController!.forward();
     animationController!.addListener(() {
       setState(() {});
@@ -104,7 +107,6 @@ class _bmicalcScreenState extends State<BmiScreen>
                     width: 160,
                     decoration: BoxDecoration(
                       color: Colors.white12,
-
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
@@ -117,8 +119,7 @@ class _bmicalcScreenState extends State<BmiScreen>
                             size: 80),
                         Text(
                           "Male",
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ],
                     ),
@@ -148,16 +149,16 @@ class _bmicalcScreenState extends State<BmiScreen>
                             size: 85),
                         Text(
                           "Female",
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 20),
+                          style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment(AlignTween!.value, 0.100),
+              SlideTransition(
+                position: AlignTweenh!,
+                // alignment: Alignment(AlignTweenh!.value, 0),
                 child: Container(
                   padding: EdgeInsets.all(10),
                   height: 200,
@@ -171,7 +172,9 @@ class _bmicalcScreenState extends State<BmiScreen>
                       Text(
                         "Height",
                         style: TextStyle(
-                            fontSize: 22, color: Colors.white,fontWeight: FontWeight.w400),
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400),
                       ),
                       SizedBox(
                         height: 5,
@@ -187,7 +190,11 @@ class _bmicalcScreenState extends State<BmiScreen>
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                          Text("Cm",style: TextStyle(color: Colors.white70,fontSize: 22),)
+                          Text(
+                            "Cm",
+                            style:
+                                TextStyle(color: Colors.white70, fontSize: 22),
+                          )
                         ],
                       ),
                       SizedBox(
@@ -199,7 +206,6 @@ class _bmicalcScreenState extends State<BmiScreen>
                         value: bmiControllertrue!.height.toDouble(),
                         activeColor: Colors.redAccent,
                         inactiveColor: Colors.black,
-
                         onChanged: (value) {
                           bmiControllerfalse!.changeHeight(value);
                           print(value);
@@ -209,164 +215,148 @@ class _bmicalcScreenState extends State<BmiScreen>
                   ),
                 ),
               ),
-
               Align(
-                alignment: Alignment(AlignTweencr!.value, 0.80),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 170,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        color: Colors.white10,
-                        borderRadius: BorderRadius.circular(10),
+                alignment: Alignment(AlignTweenw!.value, 0.80),
+                child: Container(
+                  height: 170,
+                  width: 155,
+                  decoration: BoxDecoration(
+                    color: Colors.white10,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Weight",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "${bmiControllertrue!.weight}",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 35,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            "Weight",
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 18),
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.white)),
+                            child: InkWell(
+                              onTap: () {
+                                bmiControllertrue!.addWeight();
+                              },
+                              child: Icon(Icons.add, color: Colors.white),
+                            ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "${bmiControllertrue!.weight}",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.white)
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    bmiControllertrue!.addWeight();
-                                  },
-                                  child: Icon(Icons.add,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.white),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    bmiControllertrue!.minweight();
-                                  },
-                                  child: Icon(Icons.remove,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ],
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                bmiControllertrue!.minweight();
+                              },
+                              child:
+                                  Icon(Icons.remove, color: Colors.white),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      height: 170,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        color: Colors.white10,
-                        borderRadius: BorderRadius.circular(10),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment(AlignTweenr!.value, 0.80),
+                child: Container(
+                  height: 170,
+                  width: 155,
+                  decoration: BoxDecoration(
+                    color: Colors.white10,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Age",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "${bmiControllertrue!.age}",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 35,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            "Age",
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 18),
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.white)),
+                            child: InkWell(
+                              onTap: () {
+                                bmiControllertrue!.addage();
+                              },
+                              child: Icon(Icons.add, color: Colors.white),
+                            ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "${bmiControllertrue!.age}",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.white)
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    bmiControllertrue!.addage();
-                                  },
-                                  child: Icon(Icons.add,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.white)
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    bmiControllertrue!.minage();
-                                  },
-                                  child: Icon(Icons.remove,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ],
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.white)),
+                            child: InkWell(
+                              onTap: () {
+                                bmiControllertrue!.minage();
+                              },
+                              child:
+                              Icon(Icons.remove, color: Colors.white),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top:705),
+                padding: const EdgeInsets.only(top: 705),
                 child: Align(
-                  alignment: Alignment(0, AlignTweenb!.value),
+                  // alignment: Alignment(0, AlignTweenb!.value),
                   child: InkWell(
                     onTap: () {
-                      if (bmiControllerfalse!.male != true ||
-                          bmiControllerfalse!.female != true &&
-                              bmiControllertrue!.weight != 0 &&
-                              bmiControllertrue!.age != 0) {
+                      if (bmiControllertrue!.weight != 0 && bmiControllertrue!.height!=0 && bmiControllertrue!.age != 0) {
                         bmiControllertrue!.answer();
+                        Navigator.pushNamed(context, 'health');
+
                       } else {
-                        animationController!.reset();
+                        Navigator.pushReplacementNamed(context, 'home');
                       }
-                      Navigator.pushNamed(context, 'health');
                     },
                     child: Container(
                       height: 60,
